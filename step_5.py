@@ -1,9 +1,9 @@
 # Import packages.
-from cvxpy import *
 import numpy as np
+from cvxpy import *
 
 m = 20000
-n = 20
+n = 10
 one = np.ones((m,))
 one_t = np.ones((n,)).transpose()
 

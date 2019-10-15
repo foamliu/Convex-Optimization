@@ -1,6 +1,6 @@
 # Import packages.
-from cvxpy import *
 import numpy as np
+from cvxpy import *
 
 m = 3
 n = 2

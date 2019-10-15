@@ -8,8 +8,11 @@ one = np.ones((m,))
 one_t = np.ones((n,)).transpose()
 d = np.array([2, 1]).transpose()
 
+# print(installed_solvers())
+
 # Define and solve the CVXPY problem.
 x = Variable((m, n))
+# x = Variable((m, n), boolean=True)
 revenue = sum(x)
 obj = Maximize(revenue)
 constr = [0 <= x, x <= 1, one * x >= d, x * one_t <= 1]
