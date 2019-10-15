@@ -1,5 +1,5 @@
 # Import packages.
-import cvxpy as cp
+from cvxpy import *
 import numpy as np
 
 m = 3
@@ -11,18 +11,19 @@ s = np.array([[1, 0], [1, 0], [1, 1]])
 p = np.array([1, 0.5])
 
 # Define and solve the CVXPY problem.
-x = cp.Variable((m, n))
-u = cp.Variable((n,)).T
+x = Variable((m, n))
+u = Variable((n,)).T
 
-objective = cp.Minimize(p * u)
-constraints = [0 <= x, 0 <= u, one * cp.multiply(x, s) + u >= d, cp.multiply(x, s) * one_t <= 1]
-prob = cp.Problem(objective, constraints)
-prob.solve()
+cost = p * u
+obj = Minimize(cost)
+constr = [0 <= x, 0 <= u, one * multiply(x, s) + u >= d, multiply(x, s) * one_t <= 1]
+prob = Problem(obj, constr)
+opt_val = prob.solve()
 
 # Print result.
-print("\nThe optimal value is", prob.value)
+print("\nThe optimal value is", opt_val)
 print("A solution x is")
 print(x.value)
 print("A dual solution is")
-print(constraints[2].dual_value)
-print(constraints[3].dual_value)
+print(constr[2].dual_value)
+print(constr[3].dual_value)
