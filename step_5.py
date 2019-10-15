@@ -3,7 +3,7 @@ import numpy as np
 from cvxpy import *
 
 m = 20000
-n = 10
+n = 20
 one = np.ones((m,))
 one_t = np.ones((n,)).transpose()
 
@@ -23,7 +23,7 @@ cost = p * u
 obj = Minimize(cost)
 constr = [0 <= x, 0 <= u, one * multiply(x, s) + u >= d, multiply(x, s) * one_t <= 1]
 prob = Problem(obj, constr)
-opt_val = prob.solve(verbose=True)
+opt_val = prob.solve(solver=SCS, verbose=True)
 
 # Print result.
 print("\nThe optimal value is", opt_val)
